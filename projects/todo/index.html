@@ -2,6 +2,7 @@
     <head>
         <title>Wilson Divino - Desenvolvedor Web</title>
           <!-- Compiled and minified CSS -->
+          <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
           <style>
               header {
@@ -10,34 +11,32 @@
               header ul li {
                   display: inline-block;
               }
+              #todo .todo_item {
+                  text-transform: capitalize;
+              }
           </style>
     </head>
     <body>
         <header>
             <h5 class="left-align left">Wilson Divino</h5>
-            <!-- <ul class="right-align right">
-                <li>Projetos</li>
-                <li>Blog</li>
-            </ul> -->
         </header>
         <div class="divider clearfix"></div>
         <section class="container">
-            <div class="row">
-              <div class="col s12 m6">
-                <div class="card blue darken-4">
-                  <div class="card-content white-text">
-                    <span class="card-title">Todo App</span>
-                    <p>A task app using Web Speech API</p>
-                  </div>
-                  <div class="card-action">
-                    <a href="projects/todo/index.html">View</a>
-                  </div>
-                </div>
-              </div>
+            <h4>Todo App with Web Speech API</h4>
+            <div class="collection hide" id="todo">
+            </div>
+            <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+              <a class="btn-floating btn-large red">
+                <i class="large material-icons">add</i>
+              </a>
+              <ul>
+                <li><a class="btn-floating red" id="microphone"><i class="material-icons">mic</i></a></li>
+              </ul>
             </div>
         </section>
         <!-- Compiled and minified JavaScript -->
         <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+        <script src="js/index.js"></script>
     </body>
 </html>
