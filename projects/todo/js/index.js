@@ -19,6 +19,10 @@ $(function(){
            }
         });
 
+        recognizer.addEventListener('nonmatch', function(event) {
+           console.log('No match', event);
+        });
+
         recognizer.addEventListener('error', function(event) {
            console.log('Error', event);
         });
@@ -50,7 +54,7 @@ $(function(){
         $("#todo").append($a);
      };
 
-    $("#microphone").on('click', function(){
+    function startRecordVoice(){
         recognizer.lang = 'pt-BR';
         recognizer.continuous = true;
         recognizer.interimResults = false;
@@ -64,5 +68,17 @@ $(function(){
         } catch(e) {
            console.log('Recognition error: ' + e.message);
         }
+    };
+
+    $(window).keypress(function(event){
+        if(event.which == 109){
+            event.preventDefault();
+        }
+
+        startRecordVoice();
+    });
+
+    $("#microphone").on('click, touchstart', function(){
+        startRecordVoice();
     })
 });
