@@ -13,8 +13,6 @@ $(function(){
            for (var i = event.resultIndex; i < event.results.length; i++) {
               if (event.results[i].isFinal) {
                   createTodoItem(event.results[i][0].transcript);
-              } else {
-                  createTodoItem(event.results[i][0].transcript);
               }
            }
         });
@@ -25,10 +23,13 @@ $(function(){
 
         recognizer.addEventListener('error', function(event) {
            console.log('Error', event);
+           document.getElementById('stop').classList.add('hide');
+           recognizer.stop();
         });
 
         recognizer.addEventListener('end', function() {
            console.log('End', event);
+           document.getElementById('stop').classList.add('hide');
         });
      }
 
@@ -57,28 +58,35 @@ $(function(){
     function startRecordVoice(){
         recognizer.lang = 'pt-BR';
         recognizer.continuous = true;
-        recognizer.interimResults = false;
+        recognizer.interimResults = true;
+
         try {
            recognizer.start();
+           document.getElementById('stop').classList.remove('hide');
            console.log('Recognition started');
-
-           setTimeout(function(){
-              recognizer.stop();
-           }, 3000);
         } catch(e) {
+            recognizer.stop();
            console.log('Recognition error: ' + e.message);
         }
     };
 
     $(window).keypress(function(event){
-        if(event.which == 109){
-            event.preventDefault();
-        }
+         event.preventDefault();
 
-        startRecordVoice();
+         if (event.which == 13)
+            startRecordVoice();
     });
 
-    $("#microphone").on('click, touchstart', function(){
-        startRecordVoice();
-    })
+   ['click', 'touchstart'].forEach(function (e) {
+
+      document.getElementById('stop').addEventListener(e, function() {
+         recognizer.stop();
+      }, false);
+
+      document.getElementById('microphone').addEventListener(e, function() {
+         startRecordVoice();
+      }, false);
+
+   })
+
 });
